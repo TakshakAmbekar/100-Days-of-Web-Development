@@ -38,6 +38,8 @@ console.log( this === module.exports);   // true
 console.log(this === globalThis);       // false
 console.log(global === globalThis);     // true
 
+(function(){console.log(this);})();    // in node, inside a function, this refers to the global object and you can access it using a normal function or IIFE like this example
+
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
