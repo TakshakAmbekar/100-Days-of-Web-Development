@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Event Delegation</h1>
+    <script>
+        const customUI = document.createElement('ul');
+
+        // Method 1: no delegation
+        // for (let i = 1; i <= 10; i++) {
+        //     const newElement = document.createElement('li');
+        //     newElement.textContent = "This is line " + i;
+        //     newElement.addEventListener('click', () => {
+        //         console.log('Responding')
+        //     })
+        //     customUI.appendChild(newElement);
+        // }
+
+        // Method 2: single function declaration
+        // function responding(i) {
+        //     if(i == 1) console.log(`Responding for 1st line`);
+        //     else if(i == 2) console.log(`Responding for 2nd line`);
+        //     else if(i == 3) console.log(`Responding for 3rd line`);
+        //     else console.log(`Responding for ${i}th line`);
+        // }
+
+        // for (let i = 1; i <= 10; i++) {
+        //     const newElement = document.createElement('li');
+        //     newElement.textContent = "This is line " + i;
+        //     newElement.addEventListener('click', () => responding(i));      // only writing responding(i) will trigger the function 'responding(i)' during the for loop execution itself
+        //     customUI.appendChild(newElement);
+        // }
+
+        // Method 3: single function declaration and single event listener
+        function responding(i) {
+            if(i == 1) console.log(`Responding for 1st line`);
+            else if(i == 2) console.log(`Responding for 2nd line`);
+            else if(i == 3) console.log(`Responding for 3rd line`);
+            else console.log(`Responding for ${i}th line`);
+        }
+
+        for (var i = 1; i <= 10; i++) {
+            const newElement = document.createElement('li');
+            newElement.line = i;
+            newElement.textContent = "This is line " + i;
+            customUI.appendChild(newElement);
+        }
+        customUI.addEventListener('click', (event) => responding(event.target.line))      // adding the event listener to the parent means it will be triggered when any of the child is clicked as well
+                                                                                          // we can know which child triggered the event using event.target
+        document.body.appendChild(customUI);
+    </script>
+</body>
+</html>
